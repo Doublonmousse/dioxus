@@ -71,28 +71,28 @@ impl PartialEq for PointerData {
 /// A trait for any object that has the data for a pointer event
 pub trait HasPointerData: PointerInteraction {
     /// Gets the unique identifier of the pointer causing the event.
-    fn pointer_id(&self) -> i32;
+    fn pointer_id(&self) -> u64;
 
     /// Gets the width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.
-    fn width(&self) -> i32;
+    fn width(&self) -> f64;
 
     /// Gets the height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.
-    fn height(&self) -> i32;
+    fn height(&self) -> f64;
 
     /// Gets the normalized pressure of the pointer input in the range of 0 to 1,
-    fn pressure(&self) -> f32;
+    fn pressure(&self) -> f64;
 
     /// Gets the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1,
-    fn tangential_pressure(&self) -> f32;
+    fn tangential_pressure(&self) -> f64;
 
     /// Gets the plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.
-    fn tilt_x(&self) -> i32;
+    fn tilt_x(&self) -> i64;
 
     /// Gets the plane angle (in degrees, in the range of -90 to 90) between the X-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.
-    fn tilt_y(&self) -> i32;
+    fn tilt_y(&self) -> i64;
 
     /// Gets the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.The clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-    fn twist(&self) -> i32;
+    fn twist(&self) -> u64;
 
     /// Gets the device type that caused the event (mouse, pen, touch, etc.).
     fn pointer_type(&self) -> String;
@@ -139,42 +139,42 @@ impl_event![
 
 impl PointerData {
     /// Gets the unique identifier of the pointer causing the event.
-    pub fn pointer_id(&self) -> i32 {
+    pub fn pointer_id(&self) -> u64 {
         self.inner.pointer_id()
     }
 
     /// Gets the width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.
-    pub fn width(&self) -> i32 {
+    pub fn width(&self) -> f64 {
         self.inner.width()
     }
 
     /// Gets the height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.
-    pub fn height(&self) -> i32 {
+    pub fn height(&self) -> f64 {
         self.inner.height()
     }
 
     /// Gets the normalized pressure of the pointer input in the range of 0 to 1,
-    pub fn pressure(&self) -> f32 {
+    pub fn pressure(&self) -> f64 {
         self.inner.pressure()
     }
 
     /// Gets the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1,
-    pub fn tangential_pressure(&self) -> f32 {
+    pub fn tangential_pressure(&self) -> f64 {
         self.inner.tangential_pressure()
     }
 
     /// Gets the plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.
-    pub fn tilt_x(&self) -> i32 {
+    pub fn tilt_x(&self) -> i64 {
         self.inner.tilt_x()
     }
 
     /// Gets the plane angle (in degrees, in the range of -90 to 90) between the X-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.
-    pub fn tilt_y(&self) -> i32 {
+    pub fn tilt_y(&self) -> i64 {
         self.inner.tilt_y()
     }
 
     /// Gets the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.The clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-    pub fn twist(&self) -> i32 {
+    pub fn twist(&self) -> u64 {
         self.inner.twist()
     }
 
@@ -234,28 +234,28 @@ pub struct SerializedPointerData {
     point_data: crate::point_interaction::SerializedPointInteraction,
 
     /// The unique identifier of the pointer causing the event.
-    pointer_id: i32,
+    pointer_id: u64,
 
     /// The width (magnitude on the X axis), in CSS pixels, of the contact geometry of the pointer.
-    width: i32,
+    width: f64,
 
     /// The height (magnitude on the Y axis), in CSS pixels, of the contact geometry of the pointer.
-    height: i32,
+    height: f64,
 
     /// The normalized pressure of the pointer input in the range of 0 to 1,
-    pressure: f32,
+    pressure: f64,
 
     /// The normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1,
-    tangential_pressure: f32,
+    tangential_pressure: f64,
 
     /// The plane angle (in degrees, in the range of -90 to 90) between the Y-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the Y axis.
-    tilt_x: i32,
+    tilt_x: i64,
 
     /// The plane angle (in degrees, in the range of -90 to 90) between the X-Z plane and the plane containing both the transducer (e.g. pen stylus) axis and the X axis.
-    tilt_y: i32,
+    tilt_y: i64,
 
     /// The clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.The clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-    twist: i32,
+    twist: u64,
 
     /// Indicates the device type that caused the event (mouse, pen, touch, etc.).
     pointer_type: String,
@@ -266,35 +266,35 @@ pub struct SerializedPointerData {
 
 #[cfg(feature = "serialize")]
 impl HasPointerData for SerializedPointerData {
-    fn pointer_id(&self) -> i32 {
+    fn pointer_id(&self) -> u64 {
         self.pointer_id
     }
 
-    fn width(&self) -> i32 {
+    fn width(&self) -> f64 {
         self.width
     }
 
-    fn height(&self) -> i32 {
+    fn height(&self) -> f64 {
         self.height
     }
 
-    fn pressure(&self) -> f32 {
+    fn pressure(&self) -> f64 {
         self.pressure
     }
 
-    fn tangential_pressure(&self) -> f32 {
+    fn tangential_pressure(&self) -> f64 {
         self.tangential_pressure
     }
 
-    fn tilt_x(&self) -> i32 {
+    fn tilt_x(&self) -> i64 {
         self.tilt_x
     }
 
-    fn tilt_y(&self) -> i32 {
+    fn tilt_y(&self) -> i64 {
         self.tilt_y
     }
 
-    fn twist(&self) -> i32 {
+    fn twist(&self) -> u64 {
         self.twist
     }
 

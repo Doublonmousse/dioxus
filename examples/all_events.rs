@@ -28,20 +28,7 @@ fn app() -> Element {
         div { id: "container",
             // focusing is necessary to catch keyboard events
             div { id: "receiver", tabindex: 0,
-                onmousemove: move |event| log_event(event.data()),
-                onclick: move |event| log_event(event.data()),
-                ondoubleclick: move |event| log_event(event.data()),
-                onmousedown: move |event| log_event(event.data()),
-                onmouseup: move |event| log_event(event.data()),
-
-                onwheel: move |event| log_event(event.data()),
-
-                onkeydown: move |event| log_event(event.data()),
-                onkeyup: move |event| log_event(event.data()),
-                onkeypress: move |event| log_event(event.data()),
-
-                onfocusin: move |event| log_event(event.data()),
-                onfocusout: move |event| log_event(event.data()),
+                onpointermove: move |event| log_event(event.data()),
 
                 "Hover, click, type or scroll to see the info down below"
             }

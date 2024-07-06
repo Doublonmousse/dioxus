@@ -32,7 +32,7 @@ impl MouseButton {
     /// E.g. 0 => Primary; 1 => Auxiliary
     ///
     /// Unknown codes get mapped to MouseButton::Unknown.
-    pub fn from_web_code(code: i16) -> Self {
+    pub fn from_web_code(code: i64) -> Self {
         match code {
             0 => MouseButton::Primary,
             // not a typo; auxiliary and secondary are swapped unlike in the `buttons` field.
@@ -48,7 +48,7 @@ impl MouseButton {
     /// Converts MouseButton into the corresponding button code
     ///
     /// MouseButton::Unknown will get mapped to -1
-    pub fn into_web_code(self) -> i16 {
+    pub fn into_web_code(self) -> i64 {
         match self {
             MouseButton::Primary => 0,
             // not a typo; auxiliary and secondary are swapped unlike in the `buttons` field.
@@ -65,7 +65,7 @@ impl MouseButton {
 /// A set of mouse buttons
 pub type MouseButtonSet = EnumSet<MouseButton>;
 
-pub fn decode_mouse_button_set(code: u16) -> MouseButtonSet {
+pub fn decode_mouse_button_set(code: u64) -> MouseButtonSet {
     let mut set = EnumSet::empty();
 
     // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
@@ -94,7 +94,7 @@ pub fn decode_mouse_button_set(code: u16) -> MouseButtonSet {
     set
 }
 
-pub fn encode_mouse_button_set(set: MouseButtonSet) -> u16 {
+pub fn encode_mouse_button_set(set: MouseButtonSet) -> u64 {
     let mut code = 0;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
